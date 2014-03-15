@@ -16,3 +16,11 @@
 *.exe
 *.out
 *.app
+
+# For VC
+/Debug  
+/RELEASE  
+*.ncb  
+*.plg  
+*.opt  
+*.aps  
