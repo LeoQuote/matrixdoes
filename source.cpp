@@ -25,6 +25,10 @@ float main()
 		}
 	}
 
+
+
+
+
 //	return b; 如何让函数返回一个数组呢。。。。。
 //	printf("Press any key to continue...");
 /*	getch(); */
