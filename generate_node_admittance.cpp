@@ -17,14 +17,25 @@ int main() {
         {1,4,0.12,0.5,0.01920},
         {2,4,0.08,0.40,0.01413}
     };
+    /*
+    arraySize=5;
+    float dataArray[5][5]= {
+                {1,2,0,0.105f,1.05f},
+                {2,3,0.024f,0.065f,0.016f},
+                {2,4,0.03f,0.08f,0.02f},
+                {3,4,0.018f,0.05f,0.013f},
+                {5,4,0,0.184f,0.96f}
+            
+    };
+    */
     //初始化Y阵
     std::complex<float> Yarray[arraySize][arraySize];
     
     
     int fromport , toport;
     float R,X,BOrK;
-    std::complex<float> Y;
-    for(i=0;i<4;i++) {
+    std::complex<float> Y,Y2;
+    for(i=0;i<arraySize;i++) {
         fromport=dataArray[i][0]-1;
         //std::cout << fromport <<ends;
         toport=dataArray[i][1]-1;
@@ -36,22 +47,26 @@ int main() {
         //std::cout<< conj(Z)/norm(Z)  <<ends; 
         if (BOrK >0.85){
             //如果大于0.85,就认为是变压器, 做变压器的相关变换
-            Yarray[toport][toport]+=conj(Z)/norm(Z);
-            Yarray[fromport][fromport]+=Yarray[toport][toport]*(BOrK*BOrK);
-            Yarray[toport][fromport]=Yarray[fromport][toport]=-Yarray[toport][toport]*BOrK;
+            Y=conj(Z)/norm(Z);
+    //        std::cout<< Y  <<endl;
+            Yarray[fromport][fromport]+=Y;
+            Yarray[toport][toport]+=Yarray[fromport][fromport]/(BOrK*BOrK);
+            Yarray[toport][fromport]=Yarray[fromport][toport]=-Y/BOrK;
         }
         else {
             //小于0.85,那么进行如下处理
             Y=conj(Z)/norm(Z);
-            Yarray[fromport][fromport]+=Y;//+(0,BOrK);
-            Yarray[toport][toport]+=Y;//+(0,BOrK);
+            Y2=Y+(0,BOrK);
+            //std::cout<< Y  <<endl;
+            std::complex<float> BOrK1 (0,BOrK);
+            Yarray[fromport][fromport]+=Y+BOrK1;
+            Yarray[toport][toport]+=Y+BOrK1;
             Yarray[fromport][toport]=Yarray[toport][fromport]=-Y;
         }
     }
     for (i=0;i<arraySize;i++) {
         for (j=0;j<arraySize;j++) {
             std::cout<< Yarray[i][j]<<ends;
-            
         }
         std::cout<< "" <<endl;
     }
