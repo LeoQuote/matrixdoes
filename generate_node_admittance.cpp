@@ -8,12 +8,17 @@
 #include<iostream>
 #include<complex>
 using namespace std;
+std::complex<float> oneOverX ( std::complex<float> X ) {
+    std::complex<float> oneOverX ;
+    oneOverX= conj(X)/norm(X);
+    return oneOverX;
+}
 int main() {
     int i=0,j=0,arraySize;
     arraySize=4;
     float dataArray[4][5]= {
         {1,2,0.1,0.4,0.01528},
-        {3,1,0,0.3,0.909},
+        {3,1,0,0.3,0.909091},
         {1,4,0.12,0.5,0.01920},
         {2,4,0.08,0.40,0.01413}
     };
@@ -50,7 +55,7 @@ int main() {
             Y=conj(Z)/norm(Z);
     //        std::cout<< Y  <<endl;
             Yarray[fromport][fromport]+=Y;
-            Yarray[toport][toport]+=Yarray[fromport][fromport]/(BOrK*BOrK);
+            Yarray[toport][toport]+=Y/(BOrK*BOrK);
             Yarray[toport][fromport]=Yarray[fromport][toport]=-Y/BOrK;
         }
         else {
@@ -70,4 +75,53 @@ int main() {
         }
         std::cout<< "" <<endl;
     }
+//#include<conio.h>
+//	printf("hehe\n");
+//	以下为消元
+	float b[4][4]={1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16};
+    int k;
+/*    
+    */
+	for (k=0;k<arraySize;k++){
+		for (i=k+1;i<arraySize;i++) {
+			for (j=i;j<arraySize;j++) {
+
+			Yarray[i][j]+=-Yarray[i][k]*Yarray[k][j]*oneOverX(Yarray[k][k]);
+			//Yarray[i][j]=Yarray[i][j]*oneOverX(Yarray[i][i]);
+//				printf ("%f ",b[i][j]);
+			}
+//			printf("\n");
+		}
+//		printf("\n");
+        //Yarray[0][0]=(0,0);
+        for (i=0;i<arraySize;i++) {
+			for (j=0;j<arraySize;j++) {
+				//b[i][j]=b[i][j]-b[i][1]*b[1][j]/b[1][1]; 
+                std::cout<<Yarray[i][j]<<"\t"<<ends;
+			}
+            std::cout<<""<<endl;
+		}
+        std::cout<<""<<endl;
+	}
+    for (k=1;k<arraySize;k++) {
+        for (i=k;i<arraySize;i++){
+            for (j=0;j<k;j++) {
+                Yarray[i][j]=(0,0);
+            }
+        }
+    }
+    for (i=0;i<arraySize;i++) {
+		for (j=0;j<arraySize;j++) {
+			//b[i][j]=b[i][j]-b[i][1]*b[1][j]/b[1][1]; 
+            std::cout<<Yarray[i][j]<<"\t"<<ends;
+		}
+        std::cout<<""<<endl;
+	}
 }
+
+
+
+
+
+//	printf("Press any key to continue...");
+/*	getch(); */
