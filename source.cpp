@@ -7,9 +7,9 @@ int main()
 	float b[4][4]={1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16};
 	for (k=0;k<4;k++){
 		for (i=k+1;i<4;i++) {
-			for (j=k;j<4;j++) {
+			for (j=k+1;j<4;j++) {
 			b[i][j]+=-b[i][k]*b[k][j]/b[k][k];
-			b[i][j]=b[i][j]/b[i][i];
+//			b[i][j]=b[i][j]/b[i][i];
 //				printf ("%f ",b[i][j]);
 			}
 //			printf("\n");

@@ -71,9 +71,10 @@ int main() {
     }
     for (i=0;i<arraySize;i++) {
         for (j=0;j<arraySize;j++) {
-            std::cout<< Yarray[i][j]<<ends;
+            //std::cout<< Yarray[i][j]<<ends;
+            std::cout<<real(Yarray[i][j])<<"+"<<imag(Yarray[i][j])<<"i "<<ends;
         }
-        std::cout<< "" <<endl;
+        std::cout<< ";" <<endl;
     }
 //#include<conio.h>
 //	printf("hehe\n");
@@ -84,7 +85,7 @@ int main() {
     int k;
 /*    
     */
-    //初始化上三角
+    //初始化
     for (i=0;i<arraySize;i++) {
         for (j=0;j<arraySize;j++) {
             Rarray[i][j]=Yarray[i][j];
@@ -94,8 +95,9 @@ int main() {
 	for (k=0;k<arraySize-1;k++){
 		for (i=k+1;i<arraySize;i++) {
 			for (j=k+1;j<arraySize;j++) {
-			Rarray[i][j]+=-Rarray[i][k]*Rarray[k][j]*oneOverX(Rarray[k][k]);
+			Rarray[i][j]-=Rarray[i][k]*Rarray[k][j]*oneOverX(Rarray[k][k]);
 			//Yarray[i][j]=Yarray[i][j]*oneOverX(Yarray[i][i]);
+			Rarray[i][j]=Rarray[i][j]*oneOverX(Rarray[i][i]);
 //				printf ("%f ",b[i][j]);
 			}
             Rarray[i][k]=0;
@@ -106,9 +108,10 @@ int main() {
         for (i=0;i<arraySize;i++) {
 			for (j=0;j<arraySize;j++) {
 				//b[i][j]=b[i][j]-b[i][1]*b[1][j]/b[1][1]; 
-                std::cout<<Rarray[i][j]<<"\t"<<ends;
+            //    std::cout<<Rarray[i][j]<<"\t"<<ends;
+            std::cout<<real(Rarray[i][j])<<"+"<<imag(Rarray[i][j])<<"i "<<ends;
 			}
-            std::cout<<""<<endl;
+            std::cout<<";"<<endl;
 		}
         std::cout<<""<<endl;
 	}
@@ -125,10 +128,12 @@ int main() {
     for (i=0;i<arraySize;i++) {
 		for (j=0;j<arraySize;j++) {
 			//b[i][j]=b[i][j]-b[i][1]*b[1][j]/b[1][1]; 
+            //std::cout<<real(Rarray[i][j])<<"+"<<imag(Rarray[i][j])<<"i "<<ends;
             std::cout<<Rarray[i][j]<<"\t"<<ends;
 		}
-        std::cout<<""<<endl;
+        std::cout<<";"<<endl;
 	}
+
 }
 
 
