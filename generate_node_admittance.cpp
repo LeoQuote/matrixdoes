@@ -77,43 +77,55 @@ int main() {
     }
 //#include<conio.h>
 //	printf("hehe\n");
-//	以下为消元
-	float b[4][4]={1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16};
+//	以下为消元,得到上三角R阵 Rarray 
+    std::complex<float> Uarray[arraySize][arraySize];
+    std::complex<float> Rarray[arraySize][arraySize];
+    float b[4][4]={1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16};
     int k;
 /*    
     */
-	for (k=0;k<arraySize;k++){
+    //初始化上三角
+    for (i=0;i<arraySize;i++) {
+        for (j=0;j<arraySize;j++) {
+            Rarray[i][j]=Yarray[i][j];
+        }
+    }
+        //Uarray[i][j]=Yarray[i][j];
+	for (k=0;k<arraySize-1;k++){
 		for (i=k+1;i<arraySize;i++) {
-			for (j=i;j<arraySize;j++) {
-
-			Yarray[i][j]+=-Yarray[i][k]*Yarray[k][j]*oneOverX(Yarray[k][k]);
+			for (j=k+1;j<arraySize;j++) {
+			Rarray[i][j]+=-Rarray[i][k]*Rarray[k][j]*oneOverX(Rarray[k][k]);
 			//Yarray[i][j]=Yarray[i][j]*oneOverX(Yarray[i][i]);
 //				printf ("%f ",b[i][j]);
 			}
+            Rarray[i][k]=0;
 //			printf("\n");
-		}
+        }
 //		printf("\n");
         //Yarray[0][0]=(0,0);
         for (i=0;i<arraySize;i++) {
 			for (j=0;j<arraySize;j++) {
 				//b[i][j]=b[i][j]-b[i][1]*b[1][j]/b[1][1]; 
-                std::cout<<Yarray[i][j]<<"\t"<<ends;
+                std::cout<<Rarray[i][j]<<"\t"<<ends;
 			}
             std::cout<<""<<endl;
 		}
         std::cout<<""<<endl;
 	}
+    /*
     for (k=1;k<arraySize;k++) {
         for (i=k;i<arraySize;i++){
             for (j=0;j<k;j++) {
-                Yarray[i][j]=(0,0);
+                Uarray[i][j]=(0,0);
             }
         }
     }
+    */
+    std::cout << "消元完成, 结果如下"<<endl;
     for (i=0;i<arraySize;i++) {
 		for (j=0;j<arraySize;j++) {
 			//b[i][j]=b[i][j]-b[i][1]*b[1][j]/b[1][1]; 
-            std::cout<<Yarray[i][j]<<"\t"<<ends;
+            std::cout<<Rarray[i][j]<<"\t"<<ends;
 		}
         std::cout<<""<<endl;
 	}
