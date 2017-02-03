@@ -1,7 +1,5 @@
 /*************************************************************************
 	> File Name: gennerate_node_admittance.cpp
-	> Author:戚志诚 
-	> Mail: leo.quote@hotmail.com
 	> Created Time: Thu 08 Jan 2015 04:05:25 PM CST
  ************************************************************************/
 
